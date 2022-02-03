@@ -1,12 +1,7 @@
 <template>
   <div class="app">
-    <header>
-      <h1>Nuxt Shop</h1>
-    </header>
     <main>
-      <div>
-        <input type="text">
-      </div>
+      <SearchInput v-model="searchKeyword" @search="searchProducts" />
       <ul>
         <li v-for="product in products" :key="product.id" class="item flex" @click="moveToDetailPage(product.id)" >
           <img :src="product.imageUrl" :alt="product.name" class="product-image">
@@ -20,9 +15,14 @@
 
 <script>
   import axios from 'axios'
+  import SearchInput from '@/components/SearchInput'
+  import { fetchProductByKeyword } from '@/api/api';
 
   export default {
     name: 'IndexPage',
+    components: {
+      SearchInput
+    },
     async asyncData() {
       const response = await axios.get('http://localhost:3000/products');
       const products = response.data.map(item => ({
@@ -33,20 +33,27 @@
         products
       }
     },
+    data() {
+      return {
+        searchKeyword: '',
+      }
+    },
     methods: {
       moveToDetailPage(id) {
-        console.log(id);
+        this.$router.push(`detail/${id}`);
+      },
+      async searchProducts() {
+        const response = await fetchProductByKeyword(this.searchKeyword);
+        this.products = response.data.map(item => ({
+          ...item,
+          imageUrl: `${item.imageUrl}?random=${Math.random()}`
+        }));
       }
     }
   }
 </script>
 
 <style scoped>
-  * {
-    padding: 0;
-    margin: 0;
-  }
-
   .flex {
     display: flex;
     justify-content: center;
@@ -61,7 +68,7 @@
     width: 400px;
     height: 300px;
     text-align: center;
-    margin: 0 0.5rem;
+    margin: 0.5rem 0.5rem;
     cursor: pointer;
   }
 
