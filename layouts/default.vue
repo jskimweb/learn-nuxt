@@ -1,22 +1,23 @@
 <template>
   <div>
-    <header>
-      <h1>
-				<nuxt-link to="/">Nuxt Shop</nuxt-link>
-			</h1>
-    </header>
+    <AppHeader />
     <Nuxt />
   </div>
 </template>
 
 <script>
+  import AppHeader from '@/components/AppHeader'
+
   export default {
-		name: 'DefaultPage'
+    name: 'DefaultPage',
+    components: {
+      AppHeader
+    }
   }
 </script>
 
 <style>
-  h1 {
-    text-align: center;
+  html {
+    font-size: 16px;
   }
 </style>

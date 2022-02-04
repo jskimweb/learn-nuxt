@@ -9,6 +9,9 @@
           <span>{{ product.price }}</span>
         </li>
       </ul>
+      <div class="cart-wrapper">
+        <button class="btn" @click="moveToCartPage">장바구니 바로가기</button>
+      </div>
     </main>
   </div>
 </template>
@@ -16,7 +19,7 @@
 <script>
   import axios from 'axios'
   import SearchInput from '@/components/SearchInput'
-  import { fetchProductByKeyword } from '@/api/api';
+  import { fetchProductByKeyword } from '@/api/index';
 
   export default {
     name: 'IndexPage',
@@ -48,6 +51,9 @@
           ...item,
           imageUrl: `${item.imageUrl}?random=${Math.random()}`
         }));
+      },
+      moveToCartPage() {
+        this.$router.push('/cart');
       }
     }
   }
