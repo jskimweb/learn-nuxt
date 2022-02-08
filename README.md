@@ -2,6 +2,10 @@
 
 JSON SERVER로부터 불러온 상품들을 안내하는 쇼핑몰 웹사이트입니다.
 
+## 배포 링크
+
+https://jskimweb-nuxt-shop.herokuapp.com
+
 ## 구현 기능
 
 <ul>

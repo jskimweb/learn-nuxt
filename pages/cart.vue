@@ -12,10 +12,7 @@
   import CartList from '@/components/CartList'
   export default {
     name: 'CartPage',
-    components: { CartList },
-		// async asyncData({ store }) {
-		// 	await store.dispatch('FETCH_CART_ITEMS')
-		// },
+    components: { CartList }
   }
 </script>
 
